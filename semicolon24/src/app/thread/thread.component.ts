@@ -19,8 +19,8 @@ export class ThreadComponent implements OnInit {
 
   loggedInUserName = 'Jon Deo';
   openThreadCount: number = 0;
-  containers: Array<any> = [];
   commentCount: number = 5;
+  isNewThreadClicked: boolean = false;
 
   constructor(private http : HttpClient) {}
 
@@ -30,6 +30,7 @@ export class ThreadComponent implements OnInit {
 
   openNewThread() {
     this.openThreadCount++;
-    this.containers.push(this.containers.length);
+    //this.containers.push(this.containers.length);
+    this.isNewThreadClicked = true;
   }
 }
