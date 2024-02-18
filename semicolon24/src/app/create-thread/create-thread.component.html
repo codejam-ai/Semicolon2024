@@ -1,0 +1,18 @@
+<div class="main-div">
+    <mat-card class="create-thread">
+        <div class="title"> New Thread:
+            <mat-icon style="float: right;">close</mat-icon>
+        </div>
+    </mat-card>
+    <mat-card class="create-thread mt-30">
+        <div class="new-thread">
+            Title:<input type="text" class="thread-input"><br />
+            Category:<select name="category" id="category" class="thread-select">
+                <option value="Engagement">Engagement</option>
+                <option value="Rewards">Rewards</option>
+            </select><br />
+            Description: <textarea rows="4" cols="50" class="thread-textarea"></textarea><br/>
+            <button mat-raised-button color="primary" class="btn"> Submit</button>
+        </div>
+    </mat-card>
+</div>

@@ -1,0 +1,36 @@
+.details {
+    padding: 10px;
+    border: 2px solid black;
+}
+
+::ng-deep .mat-mdc-card {
+    margin: 16px;
+}
+
+.pd-30 {
+    padding-right: 25%;
+}
+
+#contentInside {
+    width: 98%;
+    margin: 7px;
+    border: 2px solid #ccc;
+    display: inline-flex;
+    border-radius: 10px;
+}
+
+.thread {
+    padding: 15px 20px 20px 20px;
+}
+
+.float {
+    margin-left: 30%;
+}
+
+::ng-deep .mat-expansion-panel:not([class*=mat-elevation-z]) {
+    box-shadow: none !important;
+}
+
+.pb-20 {
+    padding: 20px;
+}
