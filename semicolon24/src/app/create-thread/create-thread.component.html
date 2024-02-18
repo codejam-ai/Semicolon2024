@@ -8,10 +8,9 @@
         <div class="new-thread">
             Title:<input type="text" class="thread-input"><br />
             Category:<select name="category" id="category" class="thread-select">
-                <option value="Engagement">Engagement</option>
-                <option value="Rewards">Rewards</option>
+                <option *ngFor="let cat of categories">{{cat}}</option>
             </select><br />
-            Description: <textarea rows="4" cols="50" class="thread-textarea"></textarea><br/>
+            Description: <textarea rows="4" cols="50" class="thread-textarea"></textarea><br />
             <button mat-raised-button color="primary" class="btn"> Submit</button>
         </div>
     </mat-card>

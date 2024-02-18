@@ -21,16 +21,20 @@ export class ThreadComponent implements OnInit {
   openThreadCount: number = 0;
   commentCount: number = 5;
   isNewThreadClicked: boolean = false;
+  userInfo: any;
 
-  constructor(private http : HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    
+    const url: string = '/assets/json/data.json';
+    this.http.get(url).subscribe((res) => {
+      this.userInfo = res;
+      this.loggedInUserName = this.userInfo.firstName + ' ' + this.userInfo.lastName;
+    });
   }
 
   openNewThread() {
     this.openThreadCount++;
-    //this.containers.push(this.containers.length);
     this.isNewThreadClicked = true;
   }
 }
