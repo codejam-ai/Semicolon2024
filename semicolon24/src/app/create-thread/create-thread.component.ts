@@ -14,6 +14,6 @@ import { CommonModule } from '@angular/common';
 export class CreateThreadComponent {
   
   categories: any = ['Payroll', 'HR', 'Company Policies', 'Fun Activity', 'Work Life Balance',
-    'Suggestion', 'Learning', 'Aspiration']
+    'Suggestion', 'Learning', 'Aspiration'];
 
 }

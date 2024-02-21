@@ -1,0 +1,57 @@
+.create-thread {
+    border: 2px solid brown;
+    padding: 10px;
+}
+
+.new-thread {
+    padding: 20px;
+}
+
+.mt-30 {
+    margin-top: -20px;
+}
+
+.thread-input {
+    margin-left: 6%;
+    width: 70%;
+    height: 25px;
+}
+
+.thread-select {
+    width: 15%;
+    margin-left: 3%;
+    margin-top: 20px;
+    height: 25px;
+}
+
+.thread-textarea {
+    margin: 20px 0 0 30px;
+    width: 70%;
+    height: 100px;
+}
+
+.btn {
+    float: inline-end;
+    margin-top: 20px;
+}
+
+@media only screen and (max-width: 667px) {
+    .new-thread {
+        padding: 10px;
+    }
+
+    .thread-input {
+        margin-left: 21%;
+        width: 59%;
+    }
+    
+    .thread-select {
+        margin-left: 9%;
+    }
+
+    .thread-textarea {
+        margin: 20px 0 0 18px;
+        width: 60%;
+        height: 90px;
+    }
+}

@@ -4,6 +4,23 @@
         <span class="pd-30"> Open Thread Count: {{openThreadCount}}</span>
         <button mat-raised-button color="primary" (click)="openNewThread()">New Thread</button>
     </div>
+
+    <div *ngIf="existingThread" class="existing-thread">
+        <span class="thread">Thread {{openThreadCount}}</span>
+        <span class="float">
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title> Comment Count: {{commentCount}}</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <ul>
+                        <li *ngFor="let comm of comments">{{comm}}</li>
+                    </ul>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </span>
+    </div>
+    <app-comment-existing-thread></app-comment-existing-thread>
 </mat-card>
 
 <div id="contentInside" *ngIf="isNewThreadClicked">

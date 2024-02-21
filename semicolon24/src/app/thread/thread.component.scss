@@ -20,10 +20,12 @@
 
 .thread {
     padding: 15px 20px 20px 20px;
+    display: inline;
 }
 
 .float {
     margin-left: 30%;
+    display: inline-flex;
 }
 
 ::ng-deep .mat-expansion-panel:not([class*=mat-elevation-z]) {
@@ -32,4 +34,12 @@
 
 .pb-20 {
     padding: 20px;
+}
+
+.existing-thread {
+    border: 2px solid black;
+    margin: 16px;
+    border-radius: 5px;
+    padding-top: 16px;
+    float: left;
 }

@@ -1,4 +1,9 @@
 {
-    "firstName":"Test",
-    "lastName": "User"
+    "firstName": "Test",
+    "lastName": "User",
+    "status": "open",
+    "comments": [
+        "this is comment for thread1",
+        "this is comment for thread2"
+    ]
 }
