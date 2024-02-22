@@ -27,4 +27,8 @@ export class AppComponent implements OnInit {
   loginUser() {
     this.router.navigateByUrl('login');
   }
+
+  signupUser() {
+    this.router.navigateByUrl('signup');
+  }
 }

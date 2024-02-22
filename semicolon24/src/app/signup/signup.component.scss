@@ -1,0 +1,33 @@
+.main-div {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3% 0 0 15%;
+    margin: 2% auto 0 auto;
+}
+
+.signup-card {
+    border-radius: 8px;
+    border: 1px solid #dadce0;
+    padding: 16px 32px;
+}
+
+.signup-title {
+    font-weight: bolder;
+    text-align: center;
+    font-family: math;
+    font-size: 20px;
+    color: #3f51b5;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.invalid-feedback {
+    color: red;
+    padding-bottom: 10px;
+    margin-top: -10px;
+}

@@ -1,1 +1,85 @@
-<p>signup works!</p>
+<div class="container">
+    <div class="main-div">
+        <mat-card class="signup-card">
+            <mat-card-content class="signup-title">Signup Form!!</mat-card-content>
+            <form [formGroup]="signupForm">
+
+                <div class="firstName">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-icon matPrefix>person_outline</mat-icon>
+                        <mat-label>FirstName</mat-label>
+                        <input matInput type="text" formControlName="firstName"
+                            [ngClass]="{'is-invalid':(f['firstName'].touched || f['firstName'].dirty) && f['firstName'].errors}">
+                    </mat-form-field><br>
+                    <div *ngIf="f['firstName'].errors && (f['firstName'].touched || f['firstName'].dirty)"
+                        class="invalid-feedback">
+                        <div *ngIf="f['firstName'].errors['required']">FirstName is required</div>
+                    </div>
+                </div>
+
+                <div class="userName">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-icon matPrefix>person_outline</mat-icon>
+                        <mat-label>UserName</mat-label>
+                        <input matInput type="text" formControlName="userName"
+                            [ngClass]="{'is-invalid':(f['userName'].touched || f['userName'].dirty) && f['userName'].errors}">
+                    </mat-form-field><br>
+                    <div *ngIf="f['userName'].errors && (f['userName'].touched || f['userName'].dirty) "
+                        class="invalid-feedback">
+                        <div *ngIf="f['userName'].errors['required']">Username is required</div>
+                        <div *ngIf="f['userName'].errors['minlength']">Username must be at least 6 characters</div>
+                        <div *ngIf="f['userName'].errors['maxlength']">Username must not exceed 15 characters</div>
+                    </div>
+                </div>
+
+                <div class="email">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-icon matPrefix>email</mat-icon>
+                        <mat-label>Email</mat-label>
+                        <input matInput type="email" formControlName="email"
+                            [ngClass]="{'is-invalid':(f['email'].touched || f['email'].dirty) && f['email'].errors}">
+                    </mat-form-field><br>
+                    <div *ngIf="(f['email'].touched || f['email'].dirty) && f['email'].errors" class="invalid-feedback">
+                        <div *ngIf="f['email'].errors['required']">Email is required</div>
+                        <div *ngIf="f['email'].errors['email']">Email is invalid</div>
+                    </div>
+                </div>
+
+                <div class="password">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-icon matPrefix>lock_outline</mat-icon>
+                        <mat-label>Password</mat-label>
+                        <input matInput type="password" formControlName="password"
+                            [ngClass]="{'is-invalid':(f['password'].touched || f['password'].dirty) && f['password'].errors}">
+                    </mat-form-field><br>
+                    <div *ngIf="(f['password'].touched || f['password'].dirty) && f['password'].errors"
+                        class="invalid-feedback">
+                        <div *ngIf="f['password'].errors['required']">Password is required</div>
+                        <div *ngIf="f['password'].errors['minlength']">Password must be at least 6 characters</div>
+                        <div *ngIf="f['password'].errors['maxlength']">Username must not exceed 20 characters</div>
+                    </div>
+                </div>
+
+                <div class="confirmPassword">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-icon matPrefix>lock_outline</mat-icon>
+                        <mat-label>Confirm Password</mat-label>
+                        <input matInput type="password" formControlName="confirmPassword"
+                            [ngClass]="{'is-invalid':(f['confirmPassword'].touched || f['confirmPassword'].dirty) && f['confirmPassword'].errors}">
+                    </mat-form-field><br>
+                    <div *ngIf="(f['confirmPassword'].touched || f['confirmPassword'].dirty) && f['confirmPassword'].errors"
+                        class="invalid-feedback">
+                        <div *ngIf="f['confirmPassword'].errors['required']">Confirm Password is required</div>
+                        <div *ngIf="f['confirmPassword'].errors['matching']">Confirm Password does not match</div>
+                    </div>
+                </div>
+
+                <button style="width:45%; margin-right: 20px" type="submit" mat-raised-button
+                    color="primary" [disabled]="!signupForm.valid" (click)="onSubmit()">Signup</button>
+
+                <button style="width:45%;" type="submit" mat-raised-button color="secondary"
+                    (click)="onReset()">Reset</button>
+            </form>
+        </mat-card>
+    </div>
+</div>

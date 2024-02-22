@@ -13,4 +13,9 @@ export class ApiService {
     let url: string = '/assets/json/login.json';
     return this.http.get(url, userDetails);
   }
+
+  signupUserDetails(userDetails: any): Observable<any> {
+    let url: string = '/assets/json/login.json';
+    return this.http.post(url, userDetails);
+  }
 }

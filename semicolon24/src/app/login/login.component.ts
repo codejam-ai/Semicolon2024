@@ -12,15 +12,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-login-signup',
+  selector: 'app-login',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, MatCardModule, MatInputModule, HttpClientModule, MatIconModule,
     MatButtonModule],
   providers: [AlertService, HttpClient, ApiService],
-  templateUrl: './login-signup.component.html',
-  styleUrl: './login-signup.component.scss'
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss'
 })
-export class LoginSignupComponent implements OnInit {
+export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   isValidUser: boolean = false;
