@@ -7,12 +7,16 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { CreateThreadComponent } from '../create-thread/create-thread.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommentExistingThreadComponent } from '../comment-existing-thread/comment-existing-thread.component';
+import { AuthenticationService } from '../_services/authentication.service';
+import { Router } from '@angular/router';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-thread',
   standalone: true,
   imports: [CommonModule, MatCardModule, MatFormFieldModule, MatButtonModule,
-    MatExpansionModule, CreateThreadComponent, HttpClientModule, CommentExistingThreadComponent],
+    MatExpansionModule, CreateThreadComponent, HttpClientModule, CommentExistingThreadComponent,
+    MatToolbarModule],
   templateUrl: './thread.component.html',
   styleUrl: './thread.component.scss'
 })
@@ -25,7 +29,7 @@ export class ThreadComponent implements OnInit {
   existingThread: boolean = false;
   comments: Array<any> = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
     const url: string = '/assets/json/data.json';
@@ -42,5 +46,10 @@ export class ThreadComponent implements OnInit {
   openNewThread() {
     this.openThreadCount++;
     this.isNewThreadClicked = true;
+  }
+
+  logout() {
+    this.authService.logoutUser();
+    this.router.navigateByUrl('');
   }
 }

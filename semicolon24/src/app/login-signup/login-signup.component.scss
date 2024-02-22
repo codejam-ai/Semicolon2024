@@ -1,0 +1,48 @@
+.main-div {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px auto;
+}
+
+.login-card {
+    border-radius: 8px;
+    border: 1px solid #dadce0;
+    padding: 32px;
+}
+
+.login-title {
+    font-weight: bolder;
+    text-align: center;
+    font-family: math;
+    font-size: 20px;
+    color: #3f51b5;
+    padding-bottom: 16px;
+}
+
+.create-acc {
+    cursor: pointer;
+    margin-right: 25px;
+    font-weight: bold;
+    color: #3f51b5;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.invalid-feedback {
+    color: red;
+    padding-bottom: 10px;
+    margin-top: -10px;
+}
+
+.error-msg {
+    color: red;
+}
+
+.submit-btn {
+    margin-left: 34%;
+}
