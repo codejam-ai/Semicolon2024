@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -23,7 +24,8 @@ export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder, private apiService: ApiService) { }
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
@@ -52,10 +54,10 @@ export class SignupComponent implements OnInit {
 
     this.apiService.signupUserDetails(this.signupForm.value).subscribe(data => {
       if (data) {
-        console.log("{}", data)
+        console.log("{}", data);
+        this.router.navigateByUrl('');
       }
     });
-    console.log(JSON.stringify(this.signupForm.value, null, 2));
   }
 
   onReset(): void {

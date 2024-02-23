@@ -3,11 +3,12 @@ import { Router, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CommonModule } from '@angular/common';
 import { AuthenticationService } from './_services/authentication.service';
+import { DetailViewComponent } from './detail-view/detail-view.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatToolbarModule, CommonModule],
+  imports: [RouterOutlet, MatToolbarModule, CommonModule, DetailViewComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

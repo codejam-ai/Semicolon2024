@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '../_services/authentication.service';
-import { AlertService } from '../_services/alert.service';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { ApiService } from '../_services/api.service';
@@ -16,7 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, MatCardModule, MatInputModule, HttpClientModule, MatIconModule,
     MatButtonModule],
-  providers: [AlertService, HttpClient, ApiService],
+  providers: [HttpClient, ApiService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -32,7 +31,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
-            password: ['', Validators.required]
+      password: ['', Validators.required]
     });
   }
 
@@ -47,7 +46,6 @@ export class LoginComponent implements OnInit {
     }
     this.apiService.loginUserDetails(this.loginForm.value).subscribe(data => {
       if (data) {
-        let email = this.loginForm.value.email;
         this.authService.loginUser();
         this.router.navigateByUrl('thread');
         this.isValidUser = data;
