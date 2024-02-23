@@ -4,6 +4,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { CommonModule } from '@angular/common';
 import { AuthenticationService } from './_services/authentication.service';
 import { DetailViewComponent } from './detail-view/detail-view.component';
+import { ChartComponent } from './chart/chart.component';
 
 @Component({
   selector: 'app-root',
@@ -31,5 +32,9 @@ export class AppComponent implements OnInit {
 
   signupUser() {
     this.router.navigateByUrl('signup');
+  }
+
+  chartRender(){
+    this.router.navigateByUrl('chart');
   }
 }
