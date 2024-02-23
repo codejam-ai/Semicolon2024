@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
+import {
+  MatDialog,
+  MAT_DIALOG_DATA,
+  MatDialogTitle,
+  MatDialogContent,
+} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
@@ -10,13 +16,17 @@ import { CommentExistingThreadComponent } from '../comment-existing-thread/comme
 import { AuthenticationService } from '../_services/authentication.service';
 import { Router } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
+import {MatChipsModule} from '@angular/material/chips';
 
 @Component({
   selector: 'app-thread',
   standalone: true,
   imports: [CommonModule, MatCardModule, MatFormFieldModule, MatButtonModule,
     MatExpansionModule, CreateThreadComponent, HttpClientModule, CommentExistingThreadComponent,
-    MatToolbarModule],
+    MatToolbarModule,MatSidenavModule,MatListModule,MatDividerModule,MatChipsModule],
   templateUrl: './thread.component.html',
   styleUrl: './thread.component.scss'
 })
@@ -28,8 +38,13 @@ export class ThreadComponent implements OnInit {
   isNewThreadClicked: boolean = false;
   existingThread: boolean = false;
   comments: Array<any> = [];
+  opened: boolean=true;
 
-  constructor(private http: HttpClient, private authService: AuthenticationService, private router: Router) { }
+  constructor(
+    private http: HttpClient, 
+    private authService: AuthenticationService, 
+    private router: Router,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     const url: string = '/assets/json/data.json';
@@ -46,6 +61,17 @@ export class ThreadComponent implements OnInit {
   openNewThread() {
     this.openThreadCount++;
     this.isNewThreadClicked = true;
+    this.dialog.open(CreateThreadComponent);
+    // this.dialog.open(CreateThreadComponent, {
+    //   data: {
+    //     animal: 'panda',
+    //   },
+    // });
+  }
+
+  addComment() {      
+    this.dialog.open(CommentExistingThreadComponent);
+    
   }
 
   logout() {

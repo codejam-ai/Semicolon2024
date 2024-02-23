@@ -1,6 +1,8 @@
 .details {
     padding: 10px;
     border: 2px solid black;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
 }
 
 ::ng-deep .mat-mdc-card {
@@ -11,12 +13,7 @@
     padding-right: 25%;
 }
 
-#contentInside {
-    width: 98%;
-    margin: 7px;
-    display: inline-flex;
-    border-radius: 10px;
-}
+
 
 .thread {
     padding: 15px 20px 20px 20px;
@@ -42,9 +39,31 @@
     border-radius: 5px;
     padding-top: 16px;
     float: left;
+    width:-webkit-fill-available;
 }
 
 .logout-btn {
     margin-left: auto;
     margin-right: 45px;
+}
+
+/*sidenav starts*/
+.example-container {
+    // position: absolute;
+    // top: 0;
+    // bottom: 0;
+    // left: 0;
+    // right: 0;
+  }
+  
+  .example-events {
+    width: 500px;
+  height: 300px;
+    overflow: auto;
+    border: 1px solid #555;
+  }
+/*sidenav ends*/  
+
+.mat-drawer-container {
+    height: -webkit-fill-available !important;
 }

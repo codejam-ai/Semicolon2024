@@ -32,7 +32,8 @@
 
 .btn {
     float: inline-end;
-    margin-top: 20px;
+    margin: 20px 5px 0 5px;
+    border: 2rem;
 }
 
 @media only screen and (max-width: 667px) {
@@ -54,4 +55,11 @@
         width: 60%;
         height: 90px;
     }
+}
+
+#contentInside {
+    width: max-content;
+    margin: 7px;
+    display: inline-flex;
+    border-radius: 10px;
 }
