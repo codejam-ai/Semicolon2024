@@ -47,15 +47,15 @@ export class ThreadComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    const url: string = '/assets/json/data.json';
-    this.http.get(url).subscribe((res: any) => {
-      if (res) {
-        this.existingThread = true;
-        this.loggedInUserName = res.firstName + " " + res.lastName;
-        this.comments = res.comments;
-        this.commentCount = res.comments.length;
-      }
-    });
+    // const url: string = '/assets/json/data.json';
+    // this.http.get(url).subscribe((res: any) => {
+    //   if (res) {
+    //     this.existingThread = true;
+    //     this.loggedInUserName = res.firstName + " " + res.lastName;
+    //     this.comments = res.comments;
+    //     this.commentCount = res.comments.length;
+    //   }
+    // });
   }
 
   openNewThread() {

@@ -7,15 +7,17 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
+  url: string = 'http://localhost:8088/connecto/employee/';
+
   constructor(private http: HttpClient) { }
 
   loginUserDetails(userDetails: any): Observable<any> {
-    let url: string = '/assets/json/login.json';
-    return this.http.get(url, userDetails);
+    let loginUrl = this.url + 'login';
+    return this.http.post(loginUrl, userDetails);
   }
 
   signupUserDetails(userDetails: any): Observable<any> {
-    let url: string = '/assets/json/login.json';
-    return this.http.post(url, userDetails);
+    let signupUrl = this.url + 'signup';
+    return this.http.post(signupUrl, userDetails);
   }
 }
