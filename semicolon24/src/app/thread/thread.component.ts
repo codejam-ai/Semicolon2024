@@ -20,13 +20,14 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import {MatChipsModule} from '@angular/material/chips';
+import { DetailViewComponent } from '../detail-view/detail-view.component';
 
 @Component({
   selector: 'app-thread',
   standalone: true,
   imports: [CommonModule, MatCardModule, MatFormFieldModule, MatButtonModule,
     MatExpansionModule, CreateThreadComponent, HttpClientModule, CommentExistingThreadComponent,
-    MatToolbarModule,MatSidenavModule,MatListModule,MatDividerModule,MatChipsModule],
+    MatToolbarModule,MatSidenavModule,MatListModule,MatDividerModule,MatChipsModule,DetailViewComponent],
   templateUrl: './thread.component.html',
   styleUrl: './thread.component.scss'
 })
@@ -39,6 +40,8 @@ export class ThreadComponent implements OnInit {
   existingThread: boolean = false;
   comments: Array<any> = [];
   opened: boolean=true;
+  showMyThreads:boolean=true
+  showOpenThreads:boolean=false
 
   constructor(
     private http: HttpClient, 
@@ -62,17 +65,24 @@ export class ThreadComponent implements OnInit {
     this.openThreadCount++;
     this.isNewThreadClicked = true;
     this.dialog.open(CreateThreadComponent);
-    // this.dialog.open(CreateThreadComponent, {
-    //   data: {
-    //     animal: 'panda',
-    //   },
-    // });
   }
 
   addComment() {      
     this.dialog.open(CommentExistingThreadComponent);
     
   }
+
+  toggleView(toggleVal:string){
+  if(toggleVal==='showMyThreads'){
+    this.showMyThreads=true
+    this.showOpenThreads=false
+  }else{
+  
+      this.showMyThreads=false
+      this.showOpenThreads=true
+    }
+  }
+  
 
   logout() {
     this.authService.logoutUser();

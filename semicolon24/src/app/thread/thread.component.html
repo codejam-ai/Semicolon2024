@@ -3,126 +3,391 @@
     <a mat-icon-button class="menu-icon logout-btn" (click)="logout()"> Logout</a>
 </mat-toolbar>
 <mat-card class="details">
-    <div class="pb-20">
+    <div class="pb-20" style="border:0.2rem solid">
         <span class="pd-30">Employee Name: {{loggedInUserName}} </span>
         <span class="pd-30"> Open Thread Count: {{openThreadCount}}</span>
         <!-- <button mat-raised-button color="primary" (click)="openNewThread()">New Thread</button> -->
     </div>
     <mat-sidenav-container class="example-container" autosize>
-  <mat-sidenav #sidenav mode="side" [(opened)]="opened">
-     <mat-nav-list>
-        <a mat-list-item> My Threads <b>0/1 </b></a>
-         <mat-divider></mat-divider>
-        <a mat-list-item> Open Threads <b>20</b></a>
-        <a mat-list-item (click)="openNewThread()"> Create Thread </a>
-        <mat-divider></mat-divider>
-        <span style="margin-left: 1rem;">Admin</span> 
-        <mat-divider></mat-divider>
-        <a mat-list-item> Pending Actions</a>
-        <a mat-list-item> Update User Roles</a>
-        <mat-divider></mat-divider>
-        <span style="margin-left: 1rem;">HR</span> 
-        <mat-divider></mat-divider>
-        <a mat-list-item > Voting Email Draft </a>
-      </mat-nav-list> 
-  </mat-sidenav>
+        <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+            <mat-nav-list>
+                <a mat-list-item (click)="toggleView('showMyThreads')"> My Threads <b>0/1 </b></a>
+                <mat-divider></mat-divider>
+                <a mat-list-item (click)="toggleView('showOpenThreads')"> Open Threads <b>20</b></a>
+                <a mat-list-item (click)="openNewThread()"> Create Thread </a>
+                <mat-divider></mat-divider>
+                <span style="margin-left: 1rem;">Admin</span>
+                <mat-divider></mat-divider>
+                <a mat-list-item> Pending Actions</a>
+                <a mat-list-item> Update User Roles</a>
+                <mat-divider></mat-divider>
+                <span style="margin-left: 1rem;">HR</span>
+                <mat-divider></mat-divider>
+                <a mat-list-item> Voting Email Draft </a>
+            </mat-nav-list>
+        </mat-sidenav>
 
-  <mat-sidenav-content>
-   
-    <p><button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button></p>
-    <mat-card>       
-    <div *ngIf="existingThread" class="existing-thread">
-        <span class="thread" style="float:right"> 
-            Comments Count(100)
-            <button mat-raised-button color="secondary" class="btn" (click)="addComment()"> Add Comment</button>
-        </span>
-        <br>
-        <span class="thread">Thread ID:</span>
-        <br>
-        <span class="thread">Title:</span>
-        <br>
-        <span class="thread">Category:</span>
-        <br>
-        <span class="float" style="float: right;">
-            <div style="display: flex;">
-            <span>Status: <mat-chip-set>
-                <mat-chip style="background-color:green;">
-                    <span style="color:white">Approved</span>
-                  </mat-chip>
-                  <mat-chip style="background-color:#ff4081;">
-                    <span style="color:white">Rejected</span>                    
-                  </mat-chip>
-                  <mat-chip style="background-color:#3f51b5;">
-                    <span style="color:white">Pending</span>
-                  </mat-chip>
-            </mat-chip-set>
-            </span>
-        </div>
-            <mat-accordion>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title> Comment Count: {{commentCount}}</mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <ul>
+        <mat-sidenav-content>
+
+            <p><button mat-button (click)="sidenav.toggle()"><i class="bi bi-layout-text-sidebar-reverse"></i></button>
+            </p>
+
+            <section *ngIf="showMyThreads">
+                My Threads
+                <mat-card>
+                    <div *ngIf="!existingThread" class="existing-thread">
+                        <button mat-button style="float:right">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                        <button mat-button style="float:right">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <button mat-button style="float:right">
+                            <i class="bi bi-chat-quote-fill"></i>
+                        </button>
+                        <button mat-button style="float:right">
+                            <i class="bi bi-star-fill"></i>
+                        </button>
+                        <span class="thread" style="float:right">
+                            <!-- Comments Count(100) -->
+                            <button mat-raised-button color="secondary" class="btn" (click)="addComment()"> Add
+                                Comment</button>
+                        </span>
+                        <br>
+                        <span class="thread">Thread ID:</span>
+                        <br>
+                        <span class="thread">Title:</span>
+                        <br>
+                        <span class="thread">Category:</span>
+                        <br>
+                        <span class="float" style="float: right;">
+                            <div style="display: flex;">
+                                <span>Status: <mat-chip-set>
+                                        <mat-chip style="background-color:green;">
+                                            <span style="color:white">Approved</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:#ff4081;">
+                                            <span style="color:white">Rejected</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:#3f51b5;">
+                                            <span style="color:white">Pending</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:yellow">
+                                            <span style="color:white">Pending Action by HR</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:orange;">
+                                            <span style="color:white">Pending for Management Justification</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:#3f51b5;">
+                                            <span style="color:white">Closed</span>
+                                        </mat-chip>
+                                    </mat-chip-set>
+                                </span>
+                            </div>
+                        </span>
+                        <mat-accordion>
+                            <mat-expansion-panel style="width: 100%">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title> <i class="bi bi-chat-left-dots-fill" style="padding: 1rem;"></i>
+                                        {{commentCount}}</mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <app-detail-view></app-detail-view>
+                                <!-- <ul>
                         <li *ngFor="let comm of comments">{{comm}}</li>
-                    </ul>
-                </mat-expansion-panel>
-            </mat-accordion>
-        </span>
-    </div>
-    </mat-card>
+                    </ul> -->
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </div>
+                </mat-card>
 
-    <mat-card>       
-        <div *ngIf="existingThread" class="existing-thread">
-            <span class="thread" style="float:right"> Comments Count(100)</span>
-            <br>
-            <span class="thread">Thread ID:</span>
-            <br>
-            <span class="thread">Title:</span>
-            <br>
-            <span class="thread">Category:</span>
-            <br>
-            <span class="float" style="float: right;">
-                <mat-accordion>
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title> Comment Count: {{commentCount}}</mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <ul>
+                <mat-card>
+                    <div *ngIf="!existingThread" class="existing-thread">
+                        <button mat-button style="float:right">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                        <span class="thread" style="float:right">
+                            <!-- Comments Count(100) -->
+                            <button mat-raised-button color="secondary" class="btn" (click)="addComment()"> Add
+                                Comment</button>
+                        </span>
+                        <br>
+                        <span class="thread">Thread ID:</span>
+                        <br>
+                        <span class="thread">Title:</span>
+                        <br>
+                        <span class="thread">Category:</span>
+                        <br>
+                        <span class="float" style="float: right;">
+                            <div style="display: flex;">
+                                <span>Status: <mat-chip-set>
+                                        <mat-chip style="background-color:green;">
+                                            <span style="color:white">Approved</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:#ff4081;">
+                                            <span style="color:white">Rejected</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:#3f51b5;">
+                                            <span style="color:white">Pending</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:yellow">
+                                            <span style="color:white">Pending Action by HR</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:orange;">
+                                            <span style="color:white">Pending for Management Justification</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:#3f51b5;">
+                                            <span style="color:white">Closed</span>
+                                        </mat-chip>
+                                    </mat-chip-set>
+                                </span>
+                            </div>
+                        </span>
+                        <mat-accordion>
+                            <mat-expansion-panel style="width: 100%">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title> <i class="bi bi-chat-left-dots-fill" style="padding: 1rem;"></i>
+                                        {{commentCount}}</mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <app-detail-view></app-detail-view>
+                                <!-- <ul>
                             <li *ngFor="let comm of comments">{{comm}}</li>
-                        </ul>
-                    </mat-expansion-panel>
-                </mat-accordion>
-            </span>
-        </div>
-    </mat-card>
+                        </ul> -->
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </div>
+                </mat-card>
 
-    <mat-card>       
-        <div *ngIf="existingThread" class="existing-thread">
-            <span class="thread" style="float:right"> Comments Count(100)</span>
-            <br>
-            <span class="thread">Thread ID:</span>
-            <br>
-            <span class="thread">Title:</span>
-            <br>
-            <span class="thread">Category:</span>
-            <br>
-            <span class="float" style="float: right;">
-                <mat-accordion>
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title> Comment Count: {{commentCount}}</mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <ul>
+                <mat-card>
+                    <div *ngIf="!existingThread" class="existing-thread">
+                        <button mat-button style="float:right">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                        <span class="thread" style="float:right">
+                            <!-- Comments Count(100) -->
+                            <button mat-raised-button color="secondary" class="btn" (click)="addComment()"> Add
+                                Comment</button>
+                        </span>
+                        <br>
+                        <span class="thread">Thread ID:</span>
+                        <br>
+                        <span class="thread">Title:</span>
+                        <br>
+                        <span class="thread">Category:</span>
+                        <br>
+                        <span class="float" style="float: right;">
+                            <div style="display: flex;">
+                                <span>Status: <mat-chip-set>
+                                        <mat-chip style="background-color:green;">
+                                            <span style="color:white">Approved</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:#ff4081;">
+                                            <span style="color:white">Rejected</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:#3f51b5;">
+                                            <span style="color:white">Pending</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:yellow">
+                                            <span style="color:white">Pending Action by HR</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:orange;">
+                                            <span style="color:white">Pending for Management Justification</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:#3f51b5;">
+                                            <span style="color:white">Closed</span>
+                                        </mat-chip>
+                                    </mat-chip-set>
+                                </span>
+                            </div>
+                        </span>
+                        <mat-accordion>
+                            <mat-expansion-panel style="width: 100%">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title> <i class="bi bi-chat-left-dots-fill" style="padding: 1rem;"></i>
+                                        {{commentCount}}</mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <app-detail-view></app-detail-view>
+                                <!-- <ul>
+                                <li *ngFor="let comm of comments">{{comm}}</li>
+                            </ul> -->
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </div>
+                </mat-card>
+            </section>
+
+            <section *ngIf="showOpenThreads">
+                Open Threads
+                <mat-card>
+                    <div *ngIf="!existingThread" class="existing-thread">
+                        <button mat-button style="float:right">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                        <span class="thread" style="float:right">
+                            <!-- Comments Count(100) -->
+                            <button mat-raised-button color="secondary" class="btn" (click)="addComment()"> Add
+                                Comment</button>
+                        </span>
+                        <br>
+                        <span class="thread">Thread ID:</span>
+                        <br>
+                        <span class="thread">Title:</span>
+                        <br>
+                        <span class="thread">Category:</span>
+                        <br>
+                        <span class="float" style="float: right;">
+                            <div style="display: flex;">
+                                <span>Status: <mat-chip-set>
+                                        <mat-chip style="background-color:green;">
+                                            <span style="color:white">Approved</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:#ff4081;">
+                                            <span style="color:white">Rejected</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:#3f51b5;">
+                                            <span style="color:white">Pending</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:yellow">
+                                            <span style="color:white">Pending Action by HR</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:orange;">
+                                            <span style="color:white">Pending for Management Justification</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:#3f51b5;">
+                                            <span style="color:white">Closed</span>
+                                        </mat-chip>
+                                    </mat-chip-set>
+                                </span>
+                            </div>
+                        </span>
+                        <mat-accordion>
+                            <mat-expansion-panel style="width: 100%">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title> <i class="bi bi-chat-left-dots-fill" style="padding: 1rem;"></i>
+                                        {{commentCount}}</mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <app-detail-view></app-detail-view>
+                                <!-- <ul>
                             <li *ngFor="let comm of comments">{{comm}}</li>
-                        </ul>
-                    </mat-expansion-panel>
-                </mat-accordion>
-            </span>
-        </div>
-        </mat-card>
-    <!-- <app-comment-existing-thread></app-comment-existing-thread> -->
-  </mat-sidenav-content>
-</mat-sidenav-container>
-    
+                        </ul> -->
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </div>
+                </mat-card>
+                <mat-card>
+                    <div *ngIf="!existingThread" class="existing-thread">
+                        <button mat-button style="float:right">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                        <span class="thread" style="float:right">
+                            <!-- Comments Count(100) -->
+                            <button mat-raised-button color="secondary" class="btn" (click)="addComment()"> Add
+                                Comment</button>
+                        </span>
+                        <br>
+                        <span class="thread">Thread ID:</span>
+                        <br>
+                        <span class="thread">Title:</span>
+                        <br>
+                        <span class="thread">Category:</span>
+                        <br>
+                        <span class="float" style="float: right;">
+                            <div style="display: flex;">
+                                <span>Status: <mat-chip-set>
+                                        <mat-chip style="background-color:green;">
+                                            <span style="color:white">Approved</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:#ff4081;">
+                                            <span style="color:white">Rejected</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:#3f51b5;">
+                                            <span style="color:white">Pending</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:yellow">
+                                            <span style="color:white">Pending Action by HR</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:orange;">
+                                            <span style="color:white">Pending for Management Justification</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:#3f51b5;">
+                                            <span style="color:white">Closed</span>
+                                        </mat-chip>
+                                    </mat-chip-set>
+                                </span>
+                            </div>
+                        </span>
+                        <mat-accordion>
+                            <mat-expansion-panel style="width: 100%">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title> <i class="bi bi-chat-left-dots-fill" style="padding: 1rem;"></i>
+                                        {{commentCount}}</mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <app-detail-view></app-detail-view>
+                                <!-- <ul>
+                                <li *ngFor="let comm of comments">{{comm}}</li>
+                            </ul> -->
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </div>
+                </mat-card>
+
+                <mat-card>
+                    <div *ngIf="!existingThread" class="existing-thread">
+                        <button mat-button style="float:right">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                        <span class="thread" style="float:right">
+                            <!-- Comments Count(100) -->
+                            <button mat-raised-button color="secondary" class="btn" (click)="addComment()"> Add
+                                Comment</button>
+                        </span>
+                        <br>
+                        <span class="thread">Thread ID:</span>
+                        <br>
+                        <span class="thread">Title:</span>
+                        <br>
+                        <span class="thread">Category:</span>
+                        <br>
+                        <span class="float" style="float: right;">
+                            <div style="display: flex;">
+                                <span>Status: <mat-chip-set>
+                                        <mat-chip style="background-color:green;">
+                                            <span style="color:white">Approved</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:#ff4081;">
+                                            <span style="color:white">Rejected</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:#3f51b5;">
+                                            <span style="color:white">Pending</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:yellow">
+                                            <span style="color:white">Pending Action by HR</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:orange;">
+                                            <span style="color:white">Pending for Management Justification</span>
+                                        </mat-chip>
+                                        <mat-chip style="background-color:#3f51b5;">
+                                            <span style="color:white">Closed</span>
+                                        </mat-chip>
+                                    </mat-chip-set>
+                                </span>
+                            </div>
+                        </span>
+                        <mat-accordion>
+                            <mat-expansion-panel style="width: 100%">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title> <i class="bi bi-chat-left-dots-fill" style="padding: 1rem;"></i>
+                                        {{commentCount}}</mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <app-detail-view></app-detail-view>
+                                <!-- <ul>
+                                    <li *ngFor="let comm of comments">{{comm}}</li>
+                                </ul> -->
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </div>
+                </mat-card>
+            </section>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+
 </mat-card>
