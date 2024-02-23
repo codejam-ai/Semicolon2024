@@ -6,7 +6,7 @@
 
                 <div class="email">
                     <mat-form-field class="example-full-width" appearance="fill">
-                        <mat-icon matPrefix>email</mat-icon>
+                        <mat-icon matPrefix> email</mat-icon>
                         <mat-label>Email</mat-label>
                         <input matInput type="email" formControlName="email"
                             [ngClass]="{'is-invalid':(f['email'].touched || f['email'].dirty) && f['email'].errors}">
@@ -16,19 +16,7 @@
                     </div>
                 </div>
 
-                <div class="name">
-                    <mat-form-field class="example-full-width" appearance="fill">
-                        <mat-icon matPrefix>person_outline</mat-icon>
-                        <mat-label>Name</mat-label>
-                        <input matInput type="name" formControlName="name"
-                            [ngClass]="{'is-invalid':(f['name'].touched || f['name'].dirty) && f['name'].errors}">
-                    </mat-form-field><br>
-                    <div *ngIf="(f['name'].touched || f['name'].dirty) && f['name'].errors" class="invalid-feedback">
-                        <div *ngIf="f['name'].errors['required']">Name is required</div>
-                    </div>
-                </div>
-
-                <div class="password">
+                                <div class="password">
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-icon matPrefix>person_outline</mat-icon>
                         <mat-label>Password</mat-label>

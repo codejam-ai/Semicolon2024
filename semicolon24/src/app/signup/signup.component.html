@@ -3,34 +3,45 @@
         <mat-card class="signup-card">
             <mat-card-content class="signup-title">Signup Form!!</mat-card-content>
             <form [formGroup]="signupForm">
-
-                <div class="firstName">
+                <div class="employeeID">
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-icon matPrefix>person_outline</mat-icon>
-                        <mat-label>FirstName</mat-label>
-                        <input matInput type="text" formControlName="firstName"
-                            [ngClass]="{'is-invalid':(f['firstName'].touched || f['firstName'].dirty) && f['firstName'].errors}">
+                        <mat-label>Employee ID</mat-label>
+                        <input matInput type="text" formControlName="employeeID"
+                            [ngClass]="{'is-invalid':(f['employeeID'].touched || f['employeeID'].dirty) && f['employeeID'].errors}">
                     </mat-form-field><br>
-                    <div *ngIf="f['firstName'].errors && (f['firstName'].touched || f['firstName'].dirty)"
+                    <div *ngIf="f['employeeID'].errors && (f['employeeID'].touched || f['employeeID'].dirty)"
                         class="invalid-feedback">
-                        <div *ngIf="f['firstName'].errors['required']">FirstName is required</div>
+                        <div *ngIf="f['employeeID'].errors['required']">employeeID is required</div>
                     </div>
                 </div>
 
-                <div class="userName">
+                <div class="employeeName">
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-icon matPrefix>person_outline</mat-icon>
-                        <mat-label>UserName</mat-label>
-                        <input matInput type="text" formControlName="userName"
-                            [ngClass]="{'is-invalid':(f['userName'].touched || f['userName'].dirty) && f['userName'].errors}">
+                        <mat-label>Employee Name</mat-label>
+                        <input matInput type="text" formControlName="employeeName"
+                            [ngClass]="{'is-invalid':(f['employeeName'].touched || f['employeeName'].dirty) && f['employeeName'].errors}">
                     </mat-form-field><br>
-                    <div *ngIf="f['userName'].errors && (f['userName'].touched || f['userName'].dirty) "
+                    <div *ngIf="f['employeeName'].errors && (f['employeeName'].touched || f['employeeName'].dirty)"
                         class="invalid-feedback">
-                        <div *ngIf="f['userName'].errors['required']">Username is required</div>
-                        <div *ngIf="f['userName'].errors['minlength']">Username must be at least 6 characters</div>
-                        <div *ngIf="f['userName'].errors['maxlength']">Username must not exceed 15 characters</div>
+                        <div *ngIf="f['employeeName'].errors['required']">Employee Name is required</div>
                     </div>
                 </div>
+
+                <div class="location">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-icon matPrefix>person_outline</mat-icon>
+                        <mat-label>Location</mat-label>
+                        <input matInput type="text" formControlName="location"
+                            [ngClass]="{'is-invalid':(f['location'].touched || f['location'].dirty) && f['location'].errors}">
+                    </mat-form-field><br>
+                    <div *ngIf="f['location'].errors && (f['location'].touched || f['location'].dirty)"
+                        class="invalid-feedback">
+                        <div *ngIf="f['location'].errors['required']">Location is required</div>
+                    </div>
+                </div>
+               
 
                 <div class="email">
                     <mat-form-field class="example-full-width" appearance="fill">
