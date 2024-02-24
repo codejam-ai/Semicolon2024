@@ -64,4 +64,14 @@ export class ApiService {
     let url = this.commentUrl + 'get-comments/'+threadId;
     return this.http.get(url);
   }
+  getCategoryWiseThreadCount(): Observable<any> {
+   let threadUrl = this.threadUrl + 'get-thread-count-by-category';
+    return this.http.get(threadUrl);
+  }
+
+  getVotesForThreads(): Observable<any> {
+   let threadUrl = this.threadUrl + 'get-votes-for-threads';
+     return this.http.get(threadUrl);
+   }
+
 }
