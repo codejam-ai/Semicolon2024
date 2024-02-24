@@ -36,20 +36,27 @@
                 My Threads
                 <mat-card>
                     <div *ngIf="!existingThread" class="existing-thread">
-                        <button mat-button style="float:right">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                        <button mat-button style="float:right">
-                            <i class="bi bi-pencil-square"></i>
-                        </button>
-                        <button mat-button style="float:right">
-                            <i class="bi bi-chat-quote-fill"></i>
-                        </button>
-                        <button mat-button style="float:right">
-                            <i class="bi bi-star-fill"></i>
-                        </button>
+                        <div style="flex-direction: column;">
+                            <button mat-button style="float:right">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-x" style="font-size:1.5rem"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-check" style="font-size:1.5rem"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-chat-quote-fill"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-star-fill"></i>
+                            </button>
+                        </div>
                         <span class="thread" style="float:right">
-                            <!-- Comments Count(100) -->
                             <button mat-raised-button color="secondary" class="btn" (click)="addComment()"> Add
                                 Comment</button>
                         </span>
@@ -62,27 +69,14 @@
                         <br>
                         <span class="float" style="float: right;">
                             <div style="display: flex;">
-                                <span>Status: <mat-chip-set>
-                                        <mat-chip style="background-color:green;">
+                                <!-- <span>Status:  -->
+                                    <mat-chip-set>
+                                        <mat-chip style="background-color:green;margin:0.5rem">
                                             <span style="color:white">Approved</span>
                                         </mat-chip>
-                                        <mat-chip style="background-color:#ff4081;">
-                                            <span style="color:white">Rejected</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:#3f51b5;">
-                                            <span style="color:white">Pending</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:yellow">
-                                            <span style="color:white">Pending Action by HR</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:orange;">
-                                            <span style="color:white">Pending for Management Justification</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:#3f51b5;">
-                                            <span style="color:white">Closed</span>
-                                        </mat-chip>
+                                        
                                     </mat-chip-set>
-                                </span>
+                                <!-- </span> -->
                             </div>
                         </span>
                         <mat-accordion>
@@ -102,9 +96,26 @@
 
                 <mat-card>
                     <div *ngIf="!existingThread" class="existing-thread">
-                        <button mat-button style="float:right">
-                            <i class="bi bi-trash"></i>
-                        </button>
+                        <div style="flex-direction: column;">
+                            <button mat-button style="float:right">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-x" style="font-size:1.5rem"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-check" style="font-size:1.5rem"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-chat-quote-fill"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-star-fill"></i>
+                            </button>
+                        </div>
                         <span class="thread" style="float:right">
                             <!-- Comments Count(100) -->
                             <button mat-raised-button color="secondary" class="btn" (click)="addComment()"> Add
@@ -119,25 +130,10 @@
                         <br>
                         <span class="float" style="float: right;">
                             <div style="display: flex;">
-                                <span>Status: <mat-chip-set>
-                                        <mat-chip style="background-color:green;">
-                                            <span style="color:white">Approved</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:#ff4081;">
+                                <span>Status: <mat-chip-set>                                        
+                                        <mat-chip style="background-color:#ff4081;margin:0.5rem">
                                             <span style="color:white">Rejected</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:#3f51b5;">
-                                            <span style="color:white">Pending</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:yellow">
-                                            <span style="color:white">Pending Action by HR</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:orange;">
-                                            <span style="color:white">Pending for Management Justification</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:#3f51b5;">
-                                            <span style="color:white">Closed</span>
-                                        </mat-chip>
+                                        </mat-chip>                                        
                                     </mat-chip-set>
                                 </span>
                             </div>
@@ -159,9 +155,26 @@
 
                 <mat-card>
                     <div *ngIf="!existingThread" class="existing-thread">
-                        <button mat-button style="float:right">
-                            <i class="bi bi-trash"></i>
-                        </button>
+                        <div style="flex-direction: column;">
+                            <button mat-button style="float:right">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-x" style="font-size:1.5rem"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-check" style="font-size:1.5rem"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-chat-quote-fill"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-star-fill"></i>
+                            </button>
+                        </div>
                         <span class="thread" style="float:right">
                             <!-- Comments Count(100) -->
                             <button mat-raised-button color="secondary" class="btn" (click)="addComment()"> Add
@@ -176,25 +189,11 @@
                         <br>
                         <span class="float" style="float: right;">
                             <div style="display: flex;">
-                                <span>Status: <mat-chip-set>
-                                        <mat-chip style="background-color:green;">
-                                            <span style="color:white">Approved</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:#ff4081;">
-                                            <span style="color:white">Rejected</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:#3f51b5;">
+                                <span>Status: <mat-chip-set>                                        
+                                        <mat-chip style="background-color:#3f51b5;margin:0.5rem">
                                             <span style="color:white">Pending</span>
                                         </mat-chip>
-                                        <mat-chip style="background-color:yellow">
-                                            <span style="color:white">Pending Action by HR</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:orange;">
-                                            <span style="color:white">Pending for Management Justification</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:#3f51b5;">
-                                            <span style="color:white">Closed</span>
-                                        </mat-chip>
+                                        
                                     </mat-chip-set>
                                 </span>
                             </div>
@@ -219,9 +218,26 @@
                 Open Threads
                 <mat-card>
                     <div *ngIf="!existingThread" class="existing-thread">
-                        <button mat-button style="float:right">
-                            <i class="bi bi-trash"></i>
-                        </button>
+                        <div style="flex-direction: column;">
+                            <button mat-button style="float:right">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-x" style="font-size:1.5rem"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-check" style="font-size:1.5rem"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-chat-quote-fill"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-star-fill"></i>
+                            </button>
+                        </div>
                         <span class="thread" style="float:right">
                             <!-- Comments Count(100) -->
                             <button mat-raised-button color="secondary" class="btn" (click)="addComment()"> Add
@@ -237,24 +253,11 @@
                         <span class="float" style="float: right;">
                             <div style="display: flex;">
                                 <span>Status: <mat-chip-set>
-                                        <mat-chip style="background-color:green;">
-                                            <span style="color:white">Approved</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:#ff4081;">
-                                            <span style="color:white">Rejected</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:#3f51b5;">
-                                            <span style="color:white">Pending</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:yellow">
+                                        
+                                        <mat-chip style="background-color:yellow;margin:0.5rem">
                                             <span style="color:white">Pending Action by HR</span>
                                         </mat-chip>
-                                        <mat-chip style="background-color:orange;">
-                                            <span style="color:white">Pending for Management Justification</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:#3f51b5;">
-                                            <span style="color:white">Closed</span>
-                                        </mat-chip>
+                                        
                                     </mat-chip-set>
                                 </span>
                             </div>
@@ -275,9 +278,26 @@
                 </mat-card>
                 <mat-card>
                     <div *ngIf="!existingThread" class="existing-thread">
-                        <button mat-button style="float:right">
-                            <i class="bi bi-trash"></i>
-                        </button>
+                        <div style="flex-direction: column;">
+                            <button mat-button style="float:right">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-x" style="font-size:1.5rem"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-check" style="font-size:1.5rem"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-chat-quote-fill"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-star-fill"></i>
+                            </button>
+                        </div>
                         <span class="thread" style="float:right">
                             <!-- Comments Count(100) -->
                             <button mat-raised-button color="secondary" class="btn" (click)="addComment()"> Add
@@ -293,24 +313,11 @@
                         <span class="float" style="float: right;">
                             <div style="display: flex;">
                                 <span>Status: <mat-chip-set>
-                                        <mat-chip style="background-color:green;">
-                                            <span style="color:white">Approved</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:#ff4081;">
-                                            <span style="color:white">Rejected</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:#3f51b5;">
-                                            <span style="color:white">Pending</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:yellow">
-                                            <span style="color:white">Pending Action by HR</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:orange;">
+                                        
+                                        <mat-chip style="background-color:orange;margin:0.5rem">
                                             <span style="color:white">Pending for Management Justification</span>
                                         </mat-chip>
-                                        <mat-chip style="background-color:#3f51b5;">
-                                            <span style="color:white">Closed</span>
-                                        </mat-chip>
+                                        
                                     </mat-chip-set>
                                 </span>
                             </div>
@@ -332,9 +339,26 @@
 
                 <mat-card>
                     <div *ngIf="!existingThread" class="existing-thread">
-                        <button mat-button style="float:right">
-                            <i class="bi bi-trash"></i>
-                        </button>
+                        <div style="flex-direction: column;">
+                            <button mat-button style="float:right">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-x" style="font-size:1.5rem"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-check" style="font-size:1.5rem"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-chat-quote-fill"></i>
+                            </button>
+                            <button mat-button style="float:right">
+                                <i class="bi bi-star-fill"></i>
+                            </button>
+                        </div>
                         <span class="thread" style="float:right">
                             <!-- Comments Count(100) -->
                             <button mat-raised-button color="secondary" class="btn" (click)="addComment()"> Add
@@ -350,22 +374,8 @@
                         <span class="float" style="float: right;">
                             <div style="display: flex;">
                                 <span>Status: <mat-chip-set>
-                                        <mat-chip style="background-color:green;">
-                                            <span style="color:white">Approved</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:#ff4081;">
-                                            <span style="color:white">Rejected</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:#3f51b5;">
-                                            <span style="color:white">Pending</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:yellow">
-                                            <span style="color:white">Pending Action by HR</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:orange;">
-                                            <span style="color:white">Pending for Management Justification</span>
-                                        </mat-chip>
-                                        <mat-chip style="background-color:#3f51b5;">
+                                        
+                                        <mat-chip style="background-color:#3f51b5;margin:0.5rem">
                                             <span style="color:white">Closed</span>
                                         </mat-chip>
                                     </mat-chip-set>
