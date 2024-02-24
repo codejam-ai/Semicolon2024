@@ -4,26 +4,32 @@
 </mat-toolbar>
 <mat-card class="details">
     <div class="pb-20" style="border:0.2rem solid">
-        <span class="pd-30">Employee Name: {{loggedInUserName}} </span>
+
+        <span class="pd-30">Employee Name: {{name}} </span>
         <span class="pd-30"> Open Thread Count: {{openThreadCount}}</span>
         <!-- <button mat-raised-button color="primary" (click)="openNewThread()">New Thread</button> -->
     </div>
     <mat-sidenav-container class="example-container" autosize>
         <mat-sidenav #sidenav mode="side" [(opened)]="opened">
             <mat-nav-list>
-                <a mat-list-item (click)="toggleView('showMyThreads')"> My Threads <b>0/1 </b></a>
+                <a mat-list-item (click)="toggleView('showMyThreads')"> My Threads <b>{{allMyThreads?.length}} </b></a>
                 <mat-divider></mat-divider>
                 <a mat-list-item (click)="toggleView('showOpenThreads')"> Open Threads <b>20</b></a>
                 <a mat-list-item (click)="openNewThread()"> Create Thread </a>
-                <mat-divider></mat-divider>
-                <span style="margin-left: 1rem;">Admin</span>
-                <mat-divider></mat-divider>
-                <a mat-list-item> Pending Actions</a>
-                <a mat-list-item> Update User Roles</a>
-                <mat-divider></mat-divider>
-                <span style="margin-left: 1rem;">HR</span>
-                <mat-divider></mat-divider>
-                <a mat-list-item> Voting Email Draft </a>
+                <a mat-list-item (click)="toggleView('showAnalytics')"> Analytics </a>
+                <section *ngIf="role==2">
+                    <mat-divider></mat-divider>
+                    <span style="margin-left: 1rem;">Admin</span>
+                    <mat-divider></mat-divider>
+                    <a mat-list-item> Pending Actions</a>
+                    <a mat-list-item> Update User Roles</a>
+                </section>
+                <section *ngIf="role==3">
+                    <mat-divider></mat-divider>
+                    <span style="margin-left: 1rem;">HR</span>
+                    <mat-divider></mat-divider>
+                    <a mat-list-item> Voting Email Draft </a>
+                </section>
             </mat-nav-list>
         </mat-sidenav>
 
@@ -33,369 +39,169 @@
             </p>
 
             <section *ngIf="showMyThreads">
-                My Threads
-                <mat-card>
-                    <div *ngIf="!existingThread" class="existing-thread">
-                        <div style="flex-direction: column;">
-                            <button mat-button style="float:right">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-pencil-square"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-x" style="font-size:1.5rem"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-check" style="font-size:1.5rem"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-chat-quote-fill"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-star-fill"></i>
-                            </button>
-                        </div>
-                        <span class="thread" style="float:right">
-                            <button mat-raised-button color="secondary" class="btn" (click)="addComment()"> Add
-                                Comment</button>
-                        </span>
-                        <br>
-                        <span class="thread">Thread ID:</span>
-                        <br>
-                        <span class="thread">Title:</span>
-                        <br>
-                        <span class="thread">Category:</span>
-                        <br>
-                        <span class="float" style="float: right;">
-                            <div style="display: flex;">
-                                <!-- <span>Status:  -->
-                                    <mat-chip-set>
-                                        <mat-chip style="background-color:green;margin:0.5rem">
-                                            <span style="color:white">Approved</span>
-                                        </mat-chip>
-                                        
-                                    </mat-chip-set>
-                                <!-- </span> -->
-                            </div>
-                        </span>
-                        <mat-accordion>
-                            <mat-expansion-panel style="width: 100%">
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title> <i class="bi bi-chat-left-dots-fill" style="padding: 1rem;"></i>
-                                        {{commentCount}}</mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <app-detail-view></app-detail-view>
-                                <!-- <ul>
-                        <li *ngFor="let comm of comments">{{comm}}</li>
-                    </ul> -->
-                            </mat-expansion-panel>
-                        </mat-accordion>
-                    </div>
-                </mat-card>
-
-                <mat-card>
-                    <div *ngIf="!existingThread" class="existing-thread">
-                        <div style="flex-direction: column;">
-                            <button mat-button style="float:right">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-pencil-square"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-x" style="font-size:1.5rem"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-check" style="font-size:1.5rem"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-chat-quote-fill"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-star-fill"></i>
-                            </button>
-                        </div>
-                        <span class="thread" style="float:right">
-                            <!-- Comments Count(100) -->
-                            <button mat-raised-button color="secondary" class="btn" (click)="addComment()"> Add
-                                Comment</button>
-                        </span>
-                        <br>
-                        <span class="thread">Thread ID:</span>
-                        <br>
-                        <span class="thread">Title:</span>
-                        <br>
-                        <span class="thread">Category:</span>
-                        <br>
-                        <span class="float" style="float: right;">
-                            <div style="display: flex;">
-                                <span>Status: <mat-chip-set>                                        
-                                        <mat-chip style="background-color:#ff4081;margin:0.5rem">
-                                            <span style="color:white">Rejected</span>
-                                        </mat-chip>                                        
-                                    </mat-chip-set>
+                <span style="margin-left: 1rem;">My Threads </span>
+                <div *ngIf="allMyThreads?.length>0">
+                    <div *ngFor="let thread of allMyThreads">
+                        <mat-card>
+                            <div *ngIf="!existingThread" class="existing-thread">
+                                <div style="flex-direction: column;">
+                                    <button mat-button style="float:right">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                    <button mat-button style="float:right">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </button>
+                                    <button mat-button style="float:right">
+                                        <i class="bi bi-x" style="font-size:1.5rem"></i>
+                                    </button>
+                                    <button mat-button style="float:right">
+                                        <i class="bi bi-check" style="font-size:1.5rem"></i>
+                                    </button>
+                                    <button mat-button style="float:right">
+                                        <i class="bi bi-chat-quote-fill"></i>
+                                    </button>
+                                    <button mat-button style="float:right">
+                                        <i class="bi bi-star-fill"></i>
+                                    </button>
+                                </div>
+                                <span class="thread" style="float:right">
+                                    <button mat-raised-button color="secondary" class="btn" (click)="addComment()"> Add
+                                        Comment</button>
                                 </span>
-                            </div>
-                        </span>
-                        <mat-accordion>
-                            <mat-expansion-panel style="width: 100%">
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title> <i class="bi bi-chat-left-dots-fill" style="padding: 1rem;"></i>
-                                        {{commentCount}}</mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <app-detail-view></app-detail-view>
-                                <!-- <ul>
-                            <li *ngFor="let comm of comments">{{comm}}</li>
-                        </ul> -->
-                            </mat-expansion-panel>
-                        </mat-accordion>
-                    </div>
-                </mat-card>
+                                <br>
+                                <span class="thread">Thread ID:{{thread.id}}</span>
+                                <br>
+                                <span class="thread">Title:{{thread.title}}</span>
+                                <br>
+                                <span class="thread">Category:{{thread.category.category}}</span>
+                                <br>
+                                <span class="float" style="float: right;">
+                                    <div style="display: flex;">
+                                        <!-- <span>Status:  -->
+                                        <mat-chip-set>
+                                            <mat-chip style="background-color:green;margin:0.5rem"
+                                                *ngIf="thread?.status==2">
+                                                <span style="color:white">Approved</span>
+                                            </mat-chip>
+                                            <mat-chip style="background-color:#3f51b5;margin:0.5rem"
+                                                *ngIf="thread?.id==3">
+                                                <span style="color:white">Closed</span>
+                                            </mat-chip>
+                                            <mat-chip style="background-color:#ff4081;;margin:0.5rem"
+                                                *ngIf="thread?.id==4">
+                                                <span style="color:white">Rejected</span>
+                                            </mat-chip>
+                                            <!-- <mat-chip style="background-color:yellow">
+                                            <span style="color:white">Pending Action by HR</span>
+                                        </mat-chip> -->
+                                            <mat-chip style="background-color:orange;;margin:0.5rem"
+                                                *ngIf="thread?.id==1">
+                                                <span style="color:white">Submitted</span>
+                                            </mat-chip>
 
-                <mat-card>
-                    <div *ngIf="!existingThread" class="existing-thread">
-                        <div style="flex-direction: column;">
-                            <button mat-button style="float:right">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-pencil-square"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-x" style="font-size:1.5rem"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-check" style="font-size:1.5rem"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-chat-quote-fill"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-star-fill"></i>
-                            </button>
-                        </div>
-                        <span class="thread" style="float:right">
-                            <!-- Comments Count(100) -->
-                            <button mat-raised-button color="secondary" class="btn" (click)="addComment()"> Add
-                                Comment</button>
-                        </span>
-                        <br>
-                        <span class="thread">Thread ID:</span>
-                        <br>
-                        <span class="thread">Title:</span>
-                        <br>
-                        <span class="thread">Category:</span>
-                        <br>
-                        <span class="float" style="float: right;">
-                            <div style="display: flex;">
-                                <span>Status: <mat-chip-set>                                        
-                                        <mat-chip style="background-color:#3f51b5;margin:0.5rem">
-                                            <span style="color:white">Pending</span>
-                                        </mat-chip>
-                                        
-                                    </mat-chip-set>
+                                        </mat-chip-set>
+                                        <!-- </span> -->
+                                    </div>
                                 </span>
+                                <mat-accordion>
+                                    <mat-expansion-panel style="width: 100%">
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title> <i class="bi bi-chat-left-dots-fill"
+                                                    style="padding: 1rem;"></i>
+                                                {{thread?.comments.length}}</mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        <app-detail-view></app-detail-view>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
                             </div>
-                        </span>
-                        <mat-accordion>
-                            <mat-expansion-panel style="width: 100%">
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title> <i class="bi bi-chat-left-dots-fill" style="padding: 1rem;"></i>
-                                        {{commentCount}}</mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <app-detail-view></app-detail-view>
-                                <!-- <ul>
-                                <li *ngFor="let comm of comments">{{comm}}</li>
-                            </ul> -->
-                            </mat-expansion-panel>
-                        </mat-accordion>
+                        </mat-card>
                     </div>
-                </mat-card>
+                </div>
             </section>
 
             <section *ngIf="showOpenThreads">
-                Open Threads
-                <mat-card>
-                    <div *ngIf="!existingThread" class="existing-thread">
-                        <div style="flex-direction: column;">
-                            <button mat-button style="float:right">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-pencil-square"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-x" style="font-size:1.5rem"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-check" style="font-size:1.5rem"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-chat-quote-fill"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-star-fill"></i>
-                            </button>
-                        </div>
-                        <span class="thread" style="float:right">
-                            <!-- Comments Count(100) -->
-                            <button mat-raised-button color="secondary" class="btn" (click)="addComment()"> Add
-                                Comment</button>
-                        </span>
-                        <br>
-                        <span class="thread">Thread ID:</span>
-                        <br>
-                        <span class="thread">Title:</span>
-                        <br>
-                        <span class="thread">Category:</span>
-                        <br>
-                        <span class="float" style="float: right;">
-                            <div style="display: flex;">
-                                <span>Status: <mat-chip-set>
-                                        
-                                        <mat-chip style="background-color:yellow;margin:0.5rem">
+                <span style="margin-left: 1rem;">Open Threads</span>
+                <div *ngIf="openThreads?.length>0">
+                    <div *ngFor="let thread of openThreads">
+                        <mat-card>
+                            <div *ngIf="!existingThread" class="existing-thread">
+                                <div style="flex-direction: column;">
+                                    <button mat-button style="float:right">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                    <button mat-button style="float:right">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </button>
+                                    <button mat-button style="float:right">
+                                        <i class="bi bi-x" style="font-size:1.5rem"></i>
+                                    </button>
+                                    <button mat-button style="float:right">
+                                        <i class="bi bi-check" style="font-size:1.5rem"></i>
+                                    </button>
+                                    <button mat-button style="float:right">
+                                        <i class="bi bi-chat-quote-fill"></i>
+                                    </button>
+                                    <button mat-button style="float:right">
+                                        <i class="bi bi-star-fill"></i>
+                                    </button>
+                                </div>
+                                <span class="thread" style="float:right">
+                                    <button mat-raised-button color="secondary" class="btn" (click)="addComment()"> Add
+                                        Comment</button>
+                                </span>
+                                <br>
+                                <span class="thread">Thread ID:{{thread.id}}</span>
+                                <br>
+                                <span class="thread">Title:{{thread.title}}</span>
+                                <br>
+                                <span class="thread">Category:{{thread.category.category}}</span>
+                                <br>
+                                <span class="float" style="float: right;">
+                                    <div style="display: flex;">
+                                        <!-- <span>Status:  -->
+                                        <mat-chip-set>
+                                            <mat-chip style="background-color:green;margin:0.5rem"
+                                                *ngIf="thread?.status==2">
+                                                <span style="color:white">Approved</span>
+                                            </mat-chip>
+                                            <mat-chip style="background-color:#3f51b5;margin:0.5rem"
+                                                *ngIf="thread?.id==3">
+                                                <span style="color:white">Closed</span>
+                                            </mat-chip>
+                                            <mat-chip style="background-color:#ff4081;;margin:0.5rem"
+                                                *ngIf="thread?.id==4">
+                                                <span style="color:white">Rejected</span>
+                                            </mat-chip>
+                                            <!-- <mat-chip style="background-color:yellow">
                                             <span style="color:white">Pending Action by HR</span>
-                                        </mat-chip>
-                                        
-                                    </mat-chip-set>
-                                </span>
-                            </div>
-                        </span>
-                        <mat-accordion>
-                            <mat-expansion-panel style="width: 100%">
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title> <i class="bi bi-chat-left-dots-fill" style="padding: 1rem;"></i>
-                                        {{commentCount}}</mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <app-detail-view></app-detail-view>
-                                <!-- <ul>
-                            <li *ngFor="let comm of comments">{{comm}}</li>
-                        </ul> -->
-                            </mat-expansion-panel>
-                        </mat-accordion>
-                    </div>
-                </mat-card>
-                <mat-card>
-                    <div *ngIf="!existingThread" class="existing-thread">
-                        <div style="flex-direction: column;">
-                            <button mat-button style="float:right">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-pencil-square"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-x" style="font-size:1.5rem"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-check" style="font-size:1.5rem"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-chat-quote-fill"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-star-fill"></i>
-                            </button>
-                        </div>
-                        <span class="thread" style="float:right">
-                            <!-- Comments Count(100) -->
-                            <button mat-raised-button color="secondary" class="btn" (click)="addComment()"> Add
-                                Comment</button>
-                        </span>
-                        <br>
-                        <span class="thread">Thread ID:</span>
-                        <br>
-                        <span class="thread">Title:</span>
-                        <br>
-                        <span class="thread">Category:</span>
-                        <br>
-                        <span class="float" style="float: right;">
-                            <div style="display: flex;">
-                                <span>Status: <mat-chip-set>
-                                        
-                                        <mat-chip style="background-color:orange;margin:0.5rem">
-                                            <span style="color:white">Pending for Management Justification</span>
-                                        </mat-chip>
-                                        
-                                    </mat-chip-set>
-                                </span>
-                            </div>
-                        </span>
-                        <mat-accordion>
-                            <mat-expansion-panel style="width: 100%">
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title> <i class="bi bi-chat-left-dots-fill" style="padding: 1rem;"></i>
-                                        {{commentCount}}</mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <app-detail-view></app-detail-view>
-                                <!-- <ul>
-                                <li *ngFor="let comm of comments">{{comm}}</li>
-                            </ul> -->
-                            </mat-expansion-panel>
-                        </mat-accordion>
-                    </div>
-                </mat-card>
+                                        </mat-chip> -->
+                                            <mat-chip style="background-color:orange;;margin:0.5rem"
+                                                *ngIf="thread?.id==1">
+                                                <span style="color:white">Submitted</span>
+                                            </mat-chip>
 
-                <mat-card>
-                    <div *ngIf="!existingThread" class="existing-thread">
-                        <div style="flex-direction: column;">
-                            <button mat-button style="float:right">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-pencil-square"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-x" style="font-size:1.5rem"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-check" style="font-size:1.5rem"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-chat-quote-fill"></i>
-                            </button>
-                            <button mat-button style="float:right">
-                                <i class="bi bi-star-fill"></i>
-                            </button>
-                        </div>
-                        <span class="thread" style="float:right">
-                            <!-- Comments Count(100) -->
-                            <button mat-raised-button color="secondary" class="btn" (click)="addComment()"> Add
-                                Comment</button>
-                        </span>
-                        <br>
-                        <span class="thread">Thread ID:</span>
-                        <br>
-                        <span class="thread">Title:</span>
-                        <br>
-                        <span class="thread">Category:</span>
-                        <br>
-                        <span class="float" style="float: right;">
-                            <div style="display: flex;">
-                                <span>Status: <mat-chip-set>
-                                        
-                                        <mat-chip style="background-color:#3f51b5;margin:0.5rem">
-                                            <span style="color:white">Closed</span>
-                                        </mat-chip>
-                                    </mat-chip-set>
+                                        </mat-chip-set>
+                                        <!-- </span> -->
+                                    </div>
                                 </span>
+                                <mat-accordion>
+                                    <mat-expansion-panel style="width: 100%">
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title> <i class="bi bi-chat-left-dots-fill"
+                                                    style="padding: 1rem;"></i>
+                                                {{thread?.comments.length}}</mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        <app-detail-view></app-detail-view>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
                             </div>
-                        </span>
-                        <mat-accordion>
-                            <mat-expansion-panel style="width: 100%">
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title> <i class="bi bi-chat-left-dots-fill" style="padding: 1rem;"></i>
-                                        {{commentCount}}</mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <app-detail-view></app-detail-view>
-                                <!-- <ul>
-                                    <li *ngFor="let comm of comments">{{comm}}</li>
-                                </ul> -->
-                            </mat-expansion-panel>
-                        </mat-accordion>
+                        </mat-card>
                     </div>
-                </mat-card>
+                </div>
+            </section>
+
+            <section *ngIf="showAnalytics"> 
+                 <span style="margin-left: 1rem;">Analytics </span>
             </section>
         </mat-sidenav-content>
     </mat-sidenav-container>

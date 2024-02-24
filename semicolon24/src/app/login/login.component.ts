@@ -49,6 +49,9 @@ export class LoginComponent implements OnInit {
         this.authService.loginUser();
         this.router.navigateByUrl('thread');
         this.isValidUser = data;
+        sessionStorage.setItem("name",JSON.stringify(data.name))
+        sessionStorage.setItem("token",JSON.stringify(data.id))
+        sessionStorage.setItem("role",JSON.stringify(data.role))
         this.invalidUserMsg = "";
       } else {
         this.isValidUser = false;
