@@ -22,14 +22,16 @@ import { MatDividerModule } from '@angular/material/divider';
 import {MatChipsModule} from '@angular/material/chips';
 import { DetailViewComponent } from '../detail-view/detail-view.component';
 import { ApiService } from '../_services/api.service';
+import { ChartComponent } from '../chart/chart.component';
 
 @Component({
   selector: 'app-thread',
   standalone: true,
   imports: [CommonModule, MatCardModule, MatFormFieldModule, MatButtonModule,
     MatExpansionModule, CreateThreadComponent, HttpClientModule, CommentExistingThreadComponent,
-    MatToolbarModule,MatSidenavModule,MatListModule,MatDividerModule,MatChipsModule,DetailViewComponent],
+    MatToolbarModule,MatSidenavModule,MatListModule,MatDividerModule,MatChipsModule,DetailViewComponent,ChartComponent],
     providers: [HttpClient, ApiService],
+    
     templateUrl: './thread.component.html',
   styleUrl: './thread.component.scss'
 })
@@ -100,7 +102,6 @@ export class ThreadComponent implements OnInit {
     this.showMyThreads=false
     this.showOpenThreads=false
     this.showAnalytics=true
-    this.openAnalytics();
   }  
   else{
   this.showAnalytics=false
