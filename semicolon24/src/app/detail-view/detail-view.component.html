@@ -5,28 +5,25 @@
         <div class="d-flex flex-start mb-4">
           <div class="card w-100">
             <div class="card-body p-4">
-              <div class="">
-                <h5>Title:</h5>
-                <h5>Category: {{category}}
-                  <!-- <a href="" class="add-comm" (click)="openCommentBox()">+ Add Comment</a> -->
-                </h5>
-                <div *ngIf="!commentBoxClicked">
+              <div *ngFor="let comment of comments">
+                <div>
                   <p>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
-                    ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus
-                    viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
-                    Donec lacinia congue felis in faucibus ras purus odio, vestibulum in
-                    vulputate at, tempus viverra turpis.
+                   
+                    {{comment.comment}}
+                    
                   </p>
 
                   <div class="d-flex justify-content-between align-items-center">
+                    Date: {{comment.commentedDate | date:'dd-mm-yyyy'}}
                     <div class="d-flex align-items-center">
-                      <a href="#!" class="link-muted me-2"><i class="bi bi-hand-thumbs-up"></i>132</a>&nbsp;
-                      <a href="#!" class="link-muted"><i class="bi bi-hand-thumbs-down"></i>15</a>
+                      
+                      <a href="#!" class="link-muted me-2" (click)="likeDislike(comment.id,1)"><i class="bi bi-hand-thumbs-up"></i></a>&nbsp;{{comment.noOfLikes}}
+                      <a href="#!" class="link-muted"  (click)="likeDislike(comment.id,0)"><i class="bi bi-hand-thumbs-down"></i>15</a>
                     </div>
-                    <a href="#!" class="link-muted"><i class="bi bi-reply"></i> Reply</a>
+                    <!-- <a href="#!" class="link-muted"><i class="bi bi-reply"></i> Reply</a> -->
                   </div>
                 </div>
+                <mat-divider></mat-divider>
               </div>
             </div>
           </div>

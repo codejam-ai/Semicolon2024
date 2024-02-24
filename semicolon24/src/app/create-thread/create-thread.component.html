@@ -1,25 +1,31 @@
 <div id="contentInside" >
     
 <mat-dialog-content>
+    <form [formGroup]="addThreadForm">
     <div class="main-div">
         <mat-card class="create-thread">
+            <span>{{message}}</span>
             <div class="title"> New Thread:
             </div>
         </mat-card>
         <mat-card class="create-thread mt-30">
             <div class="new-thread">
-                <span>Title:</span><input type="text" class="thread-input"><br />
-                <span>Category:</span><select name="category" id="category" class="thread-select">
-                    <option *ngFor="let cat of categories">{{cat}}</option>
+                <span>Title:</span><input type="text" class="thread-input" formControlName="title"
+                [ngClass]="{'is-invalid':(f['title'].touched || f['title'].dirty) && f['title'].errors}"><br />
+                <span>Category:</span>
+                <select name="category" id="category" class="thread-select" formControlName="category"> 
+                    <option *ngFor="let cat of categories" [value]="cat.id" [selected]="cat.id">{{cat.category}}</option>
                 </select><br />
-                <span>Description:</span><textarea rows="4" cols="50" class="thread-textarea"></textarea><br />
+                <span>Description:</span><textarea rows="4" cols="50" class="thread-textarea" formControlName="description" required></textarea><br />
                 
                 
                     <button mat-raised-button color="tertiary" class="btn" mat-dialog-close>Cancel</button>
-                    <button mat-raised-button color="primary" class="btn"> Submit</button>
+                    <button mat-raised-button color="primary" class="btn" [disabled]="!addThreadForm.valid"
+                    (click)="onSubmit()"> Submit</button>
                   
             </div>
         </mat-card>
     </div> 
+    </form>
 </mat-dialog-content>
 </div>

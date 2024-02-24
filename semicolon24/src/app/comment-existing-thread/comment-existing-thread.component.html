@@ -1,23 +1,17 @@
     <div id="contentInside" >
     
-        <mat-dialog-content>
+        <form [formGroup]="addCommentForm">
             <div class="main-div">
-                <mat-card class="create-thread">
-                    <div class="title"> New Comment
-                    </div>
-                </mat-card>
-                <mat-card class="create-thread mt-30">
-                    <div class="new-thread">
-                        <span>Title:</span><input type="text" class="thread-input"><br />
-                        <span>Category:</span><select name="category" id="category" class="thread-select">
-                            <option *ngFor="let cat of categories">{{cat}}</option>
-                        </select><br />
-                        <span>Comment:</span><textarea rows="4" cols="50" class="thread-textarea"></textarea><br />
-                         <button mat-raised-button color="tertiary" class="btn" mat-dialog-close>Cancel</button>
-                        <button mat-raised-button color="primary" class="btn"> Submit</button>
+                <mat-card class="create-thread ">
+                    <div class="new-thread">                       
+                        <span>Comment:</span><textarea rows="4" cols="50" class="thread-textarea" formControlName="description" required></textarea><br />
+                        
+                        <button mat-raised-button color="tertiary" class="btn" mat-dialog-close>Cancel</button>
+                            <button mat-raised-button color="primary" class="btn" [disabled]="!addCommentForm.valid"
+                            (click)="onSubmit()"> Submit</button>
                           
                     </div>
                 </mat-card>
             </div> 
-        </mat-dialog-content>
+            </form>
         </div>

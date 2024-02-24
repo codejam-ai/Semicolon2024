@@ -39,7 +39,7 @@ export class ThreadComponent implements OnInit {
  openThreads:any[]
   openThreadCount: number = 0;
   commentCount: number = 0;
-  isNewThreadClicked: boolean = false;
+  // isNewThreadClicked: boolean = false;
   existingThread: boolean = false;
   comments: Array<any> = [];
   opened: boolean=true;
@@ -72,19 +72,24 @@ export class ThreadComponent implements OnInit {
       if (data) {
         this.allMyThreads=data
       }else{
-//error handling
+        //error handling
       }
+    });
+    this.apiService.getOpenThreadCount().subscribe(data => {
+     this.openThreadCount=data
     });
   }
 
   openNewThread() {
-    this.openThreadCount++;
-    this.isNewThreadClicked = true;
     this.dialog.open(CreateThreadComponent);
   }
 
-  addComment() {      
-    this.dialog.open(CommentExistingThreadComponent);
+  addComment(threadId:any) {      
+    this.dialog.open(CommentExistingThreadComponent,{
+      data: {
+        threadId: threadId,
+      },
+    });
     
   }
 
