@@ -39,12 +39,12 @@ export class ApiService {
     return this.http.get(threadUrl);
   }
   getCategoryWiseThreadCount(): Observable<any> {
-   let threadUrl = this.url + 'get-thread-count-by-category';g
+   let threadUrl = this.threadUrl + 'get-thread-count-by-category';
     return this.http.get(threadUrl);
   }
 
   getVotesForThreads(): Observable<any> {
-   let threadUrl = this.url + 'get-votes-for-threads';g
+   let threadUrl = this.threadUrl + 'get-votes-for-threads';
      return this.http.get(threadUrl);
    }
 

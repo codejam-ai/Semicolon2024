@@ -9,21 +9,30 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-chart',
   standalone: true,
-  imports: [NgxChartsModule,],
+  imports: [NgxChartsModule,HttpClientModule],
+  providers: [HttpClient, ApiService],
   templateUrl: './chart.component.html',
   styleUrl: './chart.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ChartComponent  {
-  leadData = [
-    { name: "Mobiles", value: 105000 },
-    { name: "Laptop", value: 55000 },
-    { name: "AC", value: 15000 },
-    { name: "Headset", value: 150000 },
-    { name: "Fridge", value: 20000 }
-  ];
+export class ChartComponent  implements OnInit{
+  leadData :any[];
+  /*leadData = [
+    {
+        value: 3,
+        "name": "Payroll"
+    },
+    {
+        value: 2,
+        "name": "Training"
+    },
+    {
+        value: 1,
+        "name": "Insurance"
+    }
+];*/
 
-  /*
+  
   constructor(
     private http: HttpClient, 
     private authService: AuthenticationService, 
@@ -42,14 +51,14 @@ export class ChartComponent  {
         //error handling
       }
     });
-  }*/
+  }
 
   votingData =[
     {
       name: "Thread1",
       series: [
         {
-          name: "Agreed",
+          name: "agreed",
           value: 730
         },
         {
@@ -63,7 +72,7 @@ export class ChartComponent  {
       name: "Thread2",
       series: [
         {
-          name: "Agreed",
+          name: "agreed",
           value: 600
         },
         {
@@ -73,6 +82,39 @@ export class ChartComponent  {
       ]
     }
   ];
+  /* 
+  //api response data format
+  let threads= [
+      {
+          threadId: 2,
+          title: "health benefits",
+          noOfVotes: 106,
+          votes: {
+              agreed: 80,
+              notAgreed: 26
+          }
+      },
+      {
+          threadId: 1,
+          title: "Health benefits thread",
+          noOfVotes: 203,
+          votes: {
+              agreed: 91,
+              notAgreed: 112
+          }
+      }
+  ] ;*/
+
+  /*leadsList:any[] = [];
+
+  createVotingData(threads){   
+    threads.forEach(thread =>  {   
+      this.leadsList.push({
+        name: thread.title,
+        series:[ {name: "Agreed", value:thread.votes.agreed},
+                  {name: "DisAgreed", value:thread.votes.notAgreed}]})
+      });
+  }*/
 
   onSelect(event:any) {
     console.log(event);

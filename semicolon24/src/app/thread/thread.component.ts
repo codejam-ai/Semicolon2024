@@ -100,7 +100,7 @@ export class ThreadComponent implements OnInit {
     this.showMyThreads=false
     this.showOpenThreads=false
     this.showAnalytics=true
-    //this.openAnalytics();
+    this.openAnalytics();
   }  
   else{
   this.showAnalytics=false
