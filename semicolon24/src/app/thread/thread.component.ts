@@ -157,8 +157,29 @@ export class ThreadComponent implements OnInit {
       }
     });
   }
-  
+  approveThread(thread:any){   
+    console.log(thread.id)
+    this.apiService.approveThread(thread.id).subscribe(data => {
+      if (data) {
+        console.log(data)
+       thread.status=1;
+      }else{
+//error handling
+      }
+    });
+  }
 
+  rejectThread(thread:any){   
+    console.log(thread.id)
+    this.apiService.rejectThread(thread.id).subscribe(data => {
+      if (data) {
+        console.log(data)
+       thread.status=4;
+      }else{
+//error handling
+      }
+    });
+  }
   logout() {
     this.authService.logoutUser();
     this.router.navigateByUrl('');

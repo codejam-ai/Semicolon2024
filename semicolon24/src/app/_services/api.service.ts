@@ -40,6 +40,18 @@ export class ApiService {
     return this.http.get(threadUrl);
   }
 
+  approveThread(threadId: any): Observable<any> {
+    const queryParams = `${threadId}`
+    let threadUrl = this.threadUrl + 'approve-thread/' + queryParams;
+    return this.http.post(threadUrl,null);
+  }
+
+  rejectThread(threadId: any): Observable<any> {
+    const queryParams = `${threadId}`
+    let threadUrl = this.threadUrl + 'reject-thread/' + queryParams;
+    return this.http.post(threadUrl,null);
+  }
+
   getCategories(): Observable<any> {
     let threadUrl = this.threadUrl + 'get-categories';
     return this.http.get(threadUrl);
