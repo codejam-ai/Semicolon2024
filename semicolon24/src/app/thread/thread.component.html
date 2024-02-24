@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" *ngIf="token!==undefined">
     <span class="spacer"></span>
     <a mat-icon-button class="menu-icon logout-btn" (click)="logout()"> Logout</a>
 </mat-toolbar>
@@ -22,7 +22,7 @@
                     <span style="margin-left: 1rem;">Admin</span>
                     <mat-divider></mat-divider>
                     <a mat-list-item> Pending Actions</a>
-                    <a mat-list-item> Update User Roles</a>
+                    <!-- <a mat-list-item> Update User Roles</a> -->
                 </section>
                 <section *ngIf="role==3">
                     <mat-divider></mat-divider>
@@ -61,7 +61,7 @@
                                         <i class="bi bi-chat-quote-fill"></i>
                                     </button>
                                     <button mat-button style="float:right">
-                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill">{{thread.noOfVotes}}</i>
                                     </button>
                                 </div>
                                 <span class="thread" style="float:right">
@@ -148,7 +148,7 @@
                                         <i class="bi bi-chat-quote-fill"></i>
                                     </button>
                                     <button mat-button style="float:right">
-                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill">{{thread.noOfVotes}}</i>
                                     </button>
                                 </div>
                                 <span class="thread" style="float:right">

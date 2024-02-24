@@ -62,6 +62,8 @@ export class LoginComponent implements OnInit {
 
   logout() {
     this.router.navigateByUrl('/login');
+    sessionStorage.clear();
   }
+
 
 }
