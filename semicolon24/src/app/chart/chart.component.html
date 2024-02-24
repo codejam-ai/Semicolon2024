@@ -1,9 +1,10 @@
-<ngx-charts-bar-vertical 
-    [view]="[1000,400]"
-    [results]="saleData"
-    [xAxisLabel]="'Products'"
-    [legendTitle]="'Product Sale Chart'"
-    [yAxisLabel]="'Sale'"
+<div class="category" >
+    <ngx-charts-bar-vertical 
+    [view]="[1000,300]"
+    [results]="leadData"
+    [xAxisLabel]="'Lead'"
+    [legendTitle]="'Lead Chart'"
+    [yAxisLabel]="'Lead Count'"
     [legend]="true"
     [showXAxisLabel]="true"
     [showYAxisLabel]="true"
@@ -11,4 +12,19 @@
     [yAxis]="true"
     [gradient]="true">
 </ngx-charts-bar-vertical>
-<p>  Hi</p>
+</div>
+<div>
+    <ngx-charts-bar-horizontal-stacked
+  [view]="[1000,300]"
+  [results]="votingData"
+  [gradient]="false"
+  [xAxis]="true"
+  [yAxis]="true"
+  [legend]="true"
+  [showXAxisLabel]="true"
+  [showYAxisLabel]="true"
+  [xAxisLabel]="'Voting'"
+  [yAxisLabel]="'Lead'"
+  (select)="onSelect($event)">
+</ngx-charts-bar-horizontal-stacked>
+</div>

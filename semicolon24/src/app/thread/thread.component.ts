@@ -82,6 +82,9 @@ export class ThreadComponent implements OnInit {
     this.isNewThreadClicked = true;
     this.dialog.open(CreateThreadComponent);
   }
+  openAnalytics() {
+    this.router.navigateByUrl('chart');
+  }
 
   addComment() {      
     this.dialog.open(CommentExistingThreadComponent);
@@ -97,6 +100,7 @@ export class ThreadComponent implements OnInit {
     this.showMyThreads=false
     this.showOpenThreads=false
     this.showAnalytics=true
+    //this.openAnalytics();
   }  
   else{
   this.showAnalytics=false

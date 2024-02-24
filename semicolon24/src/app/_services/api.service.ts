@@ -38,4 +38,9 @@ export class ApiService {
     let threadUrl = this.url + 'get-categories';
     return this.http.get(threadUrl);
   }
+  getCategoryWiseThreadCount(): Observable<any> {
+   // const queryParams=`${params.empId}/${params.status}/${params.pagination_start}/${params.pagination_end}`
+    let threadUrl = this.url + 'get-thread-count-by-category';
+    return this.http.get(threadUrl);
+  }
 }
