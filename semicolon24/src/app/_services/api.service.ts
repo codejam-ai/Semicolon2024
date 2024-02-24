@@ -34,7 +34,7 @@ export class ApiService {
     return this.http.get(threadUrl);
   }
 
-  getOpenThreads(params: any): Observable<any> {
+  getOpenOrPendedThreads(params: any): Observable<any> {
     const queryParams = `${params.status}/${params.pagination_start}/${params.pagination_end}`
     let threadUrl = this.threadUrl + 'get-threads/' + queryParams;
     return this.http.get(threadUrl);

@@ -39,6 +39,7 @@ export class ThreadComponent implements OnInit {
 
   allMyThreads:any[]
  openThreads:any[]
+ pendingThreads:any[]
   openThreadCount: number = 0;
   commentCount: number = 0;
   // isNewThreadClicked: boolean = false;
@@ -48,6 +49,7 @@ export class ThreadComponent implements OnInit {
   showMyThreads:boolean=true
   showOpenThreads:boolean=false
   showAnalytics:boolean=false
+  showPendingThreads:boolean=false
   name:any
   token:any
   role:any
@@ -103,16 +105,25 @@ export class ThreadComponent implements OnInit {
     this.showMyThreads=true
     this.showOpenThreads=false
     this.showAnalytics=false
+    this.showPendingThreads=false
   }else if(toggleVal==='showAnalytics'){
     this.showMyThreads=false
-    this.showOpenThreads=false
+    this.showOpenThreads=false    
+    this.showPendingThreads=false
     this.showAnalytics=true
   }  
-  else{
-  this.showAnalytics=false
+  else if(toggleVal==='showOpenThreads'){   
+      this.showAnalytics=false
       this.showMyThreads=false
       this.showOpenThreads=true
+      this.showPendingThreads=false
       this.displayOpenThreads()
+    }else if((this.role===2 || this.role===3) && toggleVal==='showPendingThreads') {
+      this.showAnalytics=false
+      this.showMyThreads=false
+      this.showOpenThreads=false
+      this.showPendingThreads=true
+      this.displayPendingThreads()
     }
   }
 
@@ -122,9 +133,25 @@ export class ThreadComponent implements OnInit {
       pagination_start:0,
       pagination_end:10
     }
-    this.apiService.getOpenThreads(params).subscribe(data => {
+    this.apiService.getOpenOrPendedThreads(params).subscribe(data => {
       if (data) {
         this.openThreads=data
+      }else{
+//error handling
+      }
+    });
+  }
+
+  displayPendingThreads(){
+    const params={
+      status:1,
+      pagination_start:0,
+      pagination_end:10
+    }
+    this.apiService.getOpenOrPendedThreads(params).subscribe(data => {
+      if (data) {
+        console.log(data)
+        this.pendingThreads=data
       }else{
 //error handling
       }
